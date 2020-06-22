@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>E-commerce Project</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -79,16 +79,33 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    @php $age = 25; @endphp
+
+                    E-commerce Project <hr> {{ $first_name . ' ' .  $last_name  }} <hr> Your age is {{ $age }}.
+                    <hr>
+
+                    @if ($first_name == 'John')
+                        Welcome Boss!
+                        @else
+                        Welcome!
+                    @endif
+
+                    <hr>
+
+                    @switch($first_name)
+                        @case ('John')
+                        Welcome John
+                        @break
+
+                        @case('Test')
+                        Welcom Test
+                        @break
+
+                        @default
+                        Welcome
+                    @endswitch
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
             </div>
         </div>
     </body>
