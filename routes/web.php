@@ -13,6 +13,10 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::view('/category', 'category');
+Route::view('/product', 'product');
+Route::view('/box', 'box');
+
 /*
 Route::get('/', function () {
     return view('welcome');
