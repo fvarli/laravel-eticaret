@@ -13,10 +13,13 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/category/{slug_category_name}', 'CategoryController@index')->name('category');
+
+/*
 Route::view('/category', 'category');
 Route::view('/product', 'product');
 Route::view('/box', 'box');
-
+*/
 /*
 Route::get('/', function () {
     return view('welcome');
