@@ -14,6 +14,17 @@
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/category/{slug_category_name}', 'CategoryController@index')->name('category');
+Route::get('/product/{slug_product_name}', 'ProductController@index')->name('product');
+Route::get('/box/', 'BoxController@index')->name('box');
+Route::get('/payment/', 'PaymentController@index')->name('payment');
+Route::get('/orders/', 'OrdersController@index')->name('orders');
+Route::get('/order_detail/{id}', 'OrdersController@detail')->name('order_detail');
+
+
+Route::group(['prefix' => 'user'], function (){
+    Route::get('login', 'UserController@login')->name('login');
+    Route::get('sign_up', 'UserController@sign_up')->name('sign_up');
+});
 
 /*
 Route::view('/category', 'category');
