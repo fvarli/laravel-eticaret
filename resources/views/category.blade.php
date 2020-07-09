@@ -1,22 +1,21 @@
 @extends('layouts.master')
-@section('title', 'Category')
+@section('title', 'Category | '. $category->category_name)
 @section('content')
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="#">Anasayfa</a></li>
-            <li><a href="#">Kategori</a></li>
-            <li class="active">Kategori</li>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">{{ $category->category_name }}</a></li>
         </ol>
         <div class="row">
             <div class="col-md-3">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Kategori Adı</div>
+                    <div class="panel-heading">{{ $category->category_name }}</div>
                     <div class="panel-body">
                         <h3>Alt Kategoriler</h3>
                         <div class="list-group categories">
-                            <a href="#" class="list-group-item"><i class="fa fa-television"></i> Alt Kategori</a>
-                            <a href="#" class="list-group-item"><i class="fa fa-television"></i> Alt Kategori</a>
-                            <a href="#" class="list-group-item"><i class="fa fa-television"></i> Alt Kategori</a>
+                            @foreach($sub_category as $sub_cat)
+                                <a href="{{route('category', $sub_cat->slug)}}" class="list-group-item"><i class="fa fa-arrow-circle-right"></i> {{$sub_cat->category_name}}</a>
+                            @endforeach
                         </div>
                         <h3>Fiyat Aralığı</h3>
                         <form>
