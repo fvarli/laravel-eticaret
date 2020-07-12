@@ -8,7 +8,7 @@ use App\Models\Category;
 class HomeController extends Controller{
     public function index()
     {
-        $categories = Category::whereRaw('cat_id is null')->take(5)->get();
+        $categories = Category::whereRaw('cat_id is null')->take(6)->get();
         return view('home', compact('categories'));
 
         /*$first_name = 'John';

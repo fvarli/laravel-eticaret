@@ -22,19 +22,19 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <img src="http://lorempixel.com/640/400/food/1" alt="...">
+                            <img src="/img/food_slide_1.jpg" alt="...">
                             <div class="carousel-caption">
                                 Slide 1
                             </div>
                         </div>
                         <div class="item">
-                            <img src="http://lorempixel.com/640/400/food/2" alt="...">
+                            <img src="/img/food_slide_2.jpg" alt="...">
                             <div class="carousel-caption">
                                 Slide 2
                             </div>
                         </div>
                         <div class="item">
-                            <img src="http://lorempixel.com/640/400/food/3" alt="...">
+                            <img src="/img/food_slide_3.jpg" alt="...">
                             <div class="carousel-caption">
                                 Slide 3
                             </div>
@@ -55,7 +55,7 @@
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body">
                         <a href="#">
-                            <img src="http://lorempixel.com/400/485/food/1" class="img-responsive">
+                            <img src="/img/gunun_firsati.jpg" class="img-responsive">
                         </a>
                     </div>
                 </div>
@@ -69,22 +69,22 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/1"></a>
+                            <a href="#"><img src="/img/404x404_food_1.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/2"></a>
+                            <a href="#"><img src="/img/404x404_food_2.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/3"></a>
+                            <a href="#"><img src="/img/404x404_food_3.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/4"></a>
+                            <a href="#"><img src="/img/404x404_food_4.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
@@ -99,22 +99,22 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/1"></a>
+                            <a href="#"><img src="/img/404x404_food_1.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/2"></a>
+                            <a href="#"><img src="/img/404x404_food_2.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/3"></a>
+                            <a href="#"><img src="/img/404x404_food_3.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/4"></a>
+                            <a href="#"><img src="/img/404x404_food_4.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
@@ -128,22 +128,22 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/1"></a>
+                            <a href="#"><img src="/img/404x404_food_1.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/2"></a>
+                            <a href="#"><img src="/img/404x404_food_2.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/3"></a>
+                            <a href="#"><img src="/img/404x404_food_3.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/4"></a>
+                            <a href="#"><img src="/img/404x404_food_4.jpg"></a>
                             <p><a href="#">Ürün adı</a></p>
                             <p class="price">129 ₺</p>
                         </div>

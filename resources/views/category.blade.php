@@ -11,63 +11,58 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $category->category_name }}</div>
                     <div class="panel-body">
-                        <h3>Alt Kategoriler</h3>
-                        <div class="list-group categories">
-                            @foreach($sub_category as $sub_cat)
-                                <a href="{{route('category', $sub_cat->slug)}}" class="list-group-item"><i class="fa fa-arrow-circle-right"></i> {{$sub_cat->category_name}}</a>
-                            @endforeach
-                        </div>
-                        <h3>Fiyat Aralığı</h3>
-                        <form>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 100-200
-                                    </label>
+                        @if(count($sub_category) > 0)
+                            <h3>Alt Kategoriler</h3>
+                                <div class="list-group categories">
+                                    @foreach($sub_category as $sub_cat)
+                                        <a href="{{route('category', $sub_cat->slug)}}" class="list-group-item"><i class="fa fa-arrow-circle-right"></i> {{$sub_cat->category_name}}</a>
+                                    @endforeach
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> 200-300
-                                    </label>
+                            <h3>Fiyat Aralığı</h3>
+                            <form>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> 100-200
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> 200-300
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        @else
+                            In this category, there is no sub category.
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="products bg-content">
-                    Sırala
-                    <a href="#" class="btn btn-default">Çok Satanlar</a>
-                    <a href="#" class="btn btn-default">Yeni Ürünler</a>
+                    @if(count($products) > 0 )
+                        Sırala
+                        <a href="#" class="btn btn-default">Çok Satanlar</a>
+                        <a href="#" class="btn btn-default">Yeni Ürünler</a>
+                    @endif
                     <hr>
                     <div class="row">
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/1"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                            <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/2"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                            <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/3"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                            <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="http://lorempixel.com/400/400/food/4"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                            <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
-                        </div>
+                        @if(count($products) == 0)
+                            <div class="col-lg-12">
+                                There is no any product here for now.
+                            </div>
+                        @endif
+                        @foreach($products as $product)
+                            <div class="col-md-3 product">
+                                <a href="{{route('product', $product->slug)}}"><img src="/img/400x400_product_image.png"></a>
+                                <p><a href="{{route('product', $product->slug)}}">{{$product->product_name}}</a></p>
+                                <p class="price">{{$product->price}} ₺</p>
+                                <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
