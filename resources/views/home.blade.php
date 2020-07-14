@@ -16,29 +16,19 @@
             <div class="col-md-6">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        @for($i=0; $i<count($products_slider); $i++)
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="{{ $i == 0 ? 'active': '' }}"></li>
+                        @endfor
                     </ol>
                     <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="/img/food_slide_1.jpg" alt="...">
-                            <div class="carousel-caption">
-                                Slide 1
+                        @foreach($products_slider as $index => $product)
+                            <div class="item {{ $index == 0 ? 'active': '' }}">
+                                <img src="/img/640x400_product_image.png" alt="...">
+                                <div class="carousel-caption">
+                                    {{ $product->product_name }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <img src="/img/food_slide_2.jpg" alt="...">
-                            <div class="carousel-caption">
-                                Slide 2
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="/img/food_slide_3.jpg" alt="...">
-                            <div class="carousel-caption">
-                                Slide 3
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -54,8 +44,9 @@
                 <div class="panel panel-default" id="sidebar-product">
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body">
-                        <a href="#">
-                            <img src="/img/gunun_firsati.jpg" class="img-responsive">
+                        <a href="{{ route('product', $show_today_opportunity->slug) }}" style="color: blue">
+                            <img src="/img/400x485_product_image.png" class="img-responsive">
+                            {{ $show_today_opportunity->product_name }}
                         </a>
                     </div>
                 </div>
@@ -68,26 +59,17 @@
                 <div class="panel-heading">Öne Çıkan Ürünler</div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_1.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_2.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_3.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_4.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
+                        @foreach($products_featured as $product)
+                            <div class="col-md-3 product">
+                                <a href="{{ route('product', $product->slug) }}">
+                                    <img src="/img/400x400_product_image.png"></a>
+                                <p><a href="{{ route('product', $product->slug) }}">
+                                        {{ $product->product_name }}
+                                    </a>
+                                </p>
+                                <p class="price">{{ $product->price }} ₺</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -98,26 +80,17 @@
                 <div class="panel-heading">Çok Satan Ürünler</div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_1.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_2.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_3.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_4.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
+                        @foreach($products_best_seller as $product)
+                            <div class="col-md-3 product">
+                                <a href="{{ route('product', $product->slug) }}">
+                                    <img src="/img/400x400_product_image.png"></a>
+                                <p><a href="{{ route('product', $product->slug) }}">
+                                        {{ $product->product_name }}
+                                    </a>
+                                </p>
+                                <p class="price">{{ $product->price }} ₺</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -127,26 +100,17 @@
                 <div class="panel-heading">İndirimli Ürünler</div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_1.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_2.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_3.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
-                        <div class="col-md-3 product">
-                            <a href="#"><img src="/img/404x404_food_4.jpg"></a>
-                            <p><a href="#">Ürün adı</a></p>
-                            <p class="price">129 ₺</p>
-                        </div>
+                        @foreach($products_discount as $product)
+                            <div class="col-md-3 product">
+                                <a href="{{ route('product', $product->slug) }}">
+                                    <img src="/img/400x400_product_image.png"></a>
+                                <p><a href="{{ route('product', $product->slug) }}">
+                                        {{ $product->product_name }}
+                                    </a>
+                                </p>
+                                <p class="price">{{ $product->price }} ₺</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
