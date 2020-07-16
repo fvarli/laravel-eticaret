@@ -19,7 +19,8 @@ Route::get('/box/', 'BoxController@index')->name('box');
 Route::get('/payment/', 'PaymentController@index')->name('payment');
 Route::get('/orders/', 'OrdersController@index')->name('orders');
 Route::get('/order_detail/{id}', 'OrdersController@detail')->name('order_detail');
-
+Route::post('search', 'ProductController@search')->name('search_product');
+Route::get('search', 'ProductController@search')->name('search_product');
 
 Route::group(['prefix' => 'user'], function (){
     Route::get('login', 'UserController@login')->name('login');
