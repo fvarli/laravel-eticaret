@@ -19,12 +19,13 @@ Route::get('/box/', 'BoxController@index')->name('box');
 Route::get('/payment/', 'PaymentController@index')->name('payment');
 Route::get('/orders/', 'OrdersController@index')->name('orders');
 Route::get('/order_detail/{id}', 'OrdersController@detail')->name('order_detail');
-Route::post('search', 'ProductController@search')->name('search_product');
-Route::get('search', 'ProductController@search')->name('search_product');
+Route::post('/search', 'ProductController@search')->name('search_product');
+Route::get('/search', 'ProductController@search')->name('search_product');
 
 Route::group(['prefix' => 'user'], function (){
-    Route::get('login', 'UserController@login')->name('login');
-    Route::get('sign_up', 'UserController@sign_up')->name('sign_up');
+    Route::get('/login', 'UserController@login_form')->name('user.login');
+    Route::get('/sign_up', 'UserController@sign_up_form')->name('user.sign_up');
+    Route::post('/sign_up', 'UserController@sign_up');
 });
 
 /*

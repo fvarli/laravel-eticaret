@@ -5,14 +5,16 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Kaydol</div>
+                    <div class="panel-heading">Sign Up</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="#">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ route ('user.sign_up') }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 
                             <div class="form-group <!--has-error-->">
-                                <label for="name" class="col-md-4 control-label">Kullanıcı Adı</label>
+                                <label for="full_name" class="col-md-4 control-label">Full Name</label>
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="" required autofocus>
+                                    <input id="full_name" type="text" class="form-control" name="full_name" value="" required autofocus>
                                     <!--<span class="help-block">
                                         <strong>Kullanıcı adı boş bırakılamaz</strong>
                                     </span> -->
@@ -27,16 +29,16 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password" class="col-md-4 control-label">Şifre</label>
+                                <label for="password" class="col-md-4 control-label">Password</label>
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Şifre (Tekrar)</label>
+                                <label for="password_confirmation" class="col-md-4 control-label">Re-password</label>
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
                                 </div>
                             </div>
 
