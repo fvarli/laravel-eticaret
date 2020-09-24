@@ -21,6 +21,13 @@ class UserController extends Controller
 
     public function sign_up()
     {
+
+        $this->validate(request(),[
+            'full_name' => 'required|min:5|max:60',
+            'email' => 'required|email|unique:user',
+            'password' => 'required|confirmed|min:5|max:15',
+        ]);
+
         $user = User::create([
             'full_name' => request('full_name'),
             'email' => request('email'),
