@@ -28,6 +28,11 @@ Route::group(['prefix' => 'user'], function (){
     Route::post('/sign_up', 'UserController@sign_up');
 });
 
+Route::get('/test/email', function (){
+    $user = \App\Models\User::find(1);
+   return new App\Mail\UserRegister($user);
+});
+
 /*
 Route::view('/category', 'category');
 Route::view('/product', 'product');
