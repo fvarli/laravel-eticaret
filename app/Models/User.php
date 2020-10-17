@@ -13,11 +13,9 @@ class User extends Authenticatable
 
     protected $table = "user";
 
-    protected $fillable = [
-        'full_name', 'email', 'password','activation_code','is_active'
-    ];
-
-    protected $hidden = [
-        'password', 'activation_code',
-    ];
+    protected $fillable = ['full_name', 'email', 'password','activation_code','is_active'];
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+    const DELETED_AT = 'deleted_at';
+    protected $hidden = ['password', 'activation_code'];
 }
