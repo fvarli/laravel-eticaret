@@ -7,7 +7,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Login</div>
                     <div class="panel-body">
-                        @include('layouts.partials.errors');
+                        @include('layouts.partials.errors')
+                        @include('layouts.partials.alert') <br>
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('user.login') }}">
                             {{ csrf_field() }}
                             <div class="form-group">

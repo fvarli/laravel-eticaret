@@ -18,4 +18,9 @@ class User extends Authenticatable
     const UPDATED_AT = 'updated_at';
     const DELETED_AT = 'deleted_at';
     protected $hidden = ['password', 'activation_code'];
+
+    public function user_detail()
+    {
+        return $this->hasOne('App\Models\UserDetail')->withDefault();
+    }
 }

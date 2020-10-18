@@ -12,4 +12,9 @@ class Box extends Model
     protected $table = "box";
     protected $guarded = [];
 
+    public function product_order()
+    {
+        return $this->belongsTo('App\Models\ProductOrder');
+    }
+
 }

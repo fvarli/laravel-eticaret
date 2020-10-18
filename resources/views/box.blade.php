@@ -61,7 +61,7 @@
                     {{ method_field('DELETE') }}
                     <input type="submit" class="btn btn-info pull-left" value="Remove Box">
                 </form>
-                <a href="#" class="btn btn-success pull-right btn-lg">Ödeme Yap</a>
+                <a href="{{ route('payment') }}" class="btn btn-success pull-right btn-lg">Pay</a>
             @else
                 There is no any product yet.
             @endif

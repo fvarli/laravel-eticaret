@@ -6,6 +6,7 @@ use App\Mail\UserRegister;
 use App\Models\BoxProduct;
 use App\Models\Box;
 use App\Models\User;
+use App\Models\UserDetail;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -82,6 +83,8 @@ class UserController extends Controller
             'activation_code' => Str::random(60),
             'is_active' => 0
         ]);
+
+        $user->user_detail()->save(new UserDetail());
 
         Mail::to(request('email'))->send(new UserRegister($user));
 

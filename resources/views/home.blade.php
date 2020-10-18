@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Kategoriler</div>
+                    <div class="panel-heading">Categories</div>
                     <div class="list-group categories">
                         @foreach($categories as $cat)
                             <a href="{{route('category',$cat->slug)}}" class="list-group-item"><i class="fa fa-arrow-circle-o-right"></i> {{ $cat->category_name }}</a>

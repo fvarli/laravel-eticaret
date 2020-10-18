@@ -24,8 +24,9 @@ Route::group(['prefix' => 'box'], function (){
     Route::patch('/update/{row_id}', 'BoxController@update')->name('box.update');
 });
 // Route::get('/box/', 'BoxController@index')->name('box')->middleware('auth');
+Route::get('/payment/', 'PaymentController@index')->name('payment');
+Route::post('/payment/pay', 'PaymentController@pay')->name('pay');
 Route::group(['middleware' => 'auth'], function (){
-    Route::get('/payment/', 'PaymentController@index')->name('payment');
     Route::get('/orders/', 'OrdersController@index')->name('orders');
     Route::get('/order_detail/{id}', 'OrdersController@detail')->name('order_detail');
 });
