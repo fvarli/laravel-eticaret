@@ -28,8 +28,12 @@
                 </div>
                 <div class="col-md-7">
                     <h1>{{ $product->product_name }}</h1>
-                    <p class="price">129 ₺</p>
-                    <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
+                    <p class="price">{{ $product->price }} ₺</p>
+                    <form action="{{ route('box.add') }}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <input type="submit" class="btn btn-theme" value="Add Box">
+                    </form>
                 </div>
             </div>
 

@@ -37044,8 +37044,27 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 
 setTimeout(function () {
-  $('.alert').slideUp(500);
-}, 3000);
+  $('.alert-message').slideUp(500);
+}, 5000);
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+$('.decrease-product-piece, .increase-product-piece').on('click', function () {
+  var id = $(this).attr('data-id');
+  var piece = $(this).attr('data-piece');
+  $.ajax({
+    type: 'PATCH',
+    url: '/box/update/' + id,
+    data: {
+      piece: piece
+    },
+    success: function success() {
+      window.location.href = '/box';
+    }
+  });
+});
 
 /***/ }),
 

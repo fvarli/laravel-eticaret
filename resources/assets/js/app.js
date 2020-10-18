@@ -8,5 +8,24 @@
 require('./bootstrap');
 
 setTimeout(function () {
-    $('.alert').slideUp(500);
-},3000);
+    $('.alert-message').slideUp(500);
+},5000);
+
+$.ajaxSetup({
+   headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+   }
+});
+
+$('.decrease-product-piece, .increase-product-piece').on('click', function () {
+    let id = $(this).attr('data-id');
+    let piece = $(this).attr('data-piece');
+    $.ajax({
+        type: 'PATCH',
+        url: '/box/update/' + id,
+        data:{piece: piece},
+        success: function () {
+            window.location.href='/box';
+        }
+    })
+});

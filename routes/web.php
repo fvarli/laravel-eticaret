@@ -15,25 +15,29 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/category/{slug_category_name}', 'CategoryController@index')->name('category');
 Route::get('/product/{slug_product_name}', 'ProductController@index')->name('product');
-Route::get('/box/', 'BoxController@index')->name('box');
-// Route::get('/box/', 'BoxController@index')->name('box')->middleware('auth');
 
+Route::group(['prefix' => 'box'], function (){
+    Route::get('/', 'BoxController@index')->name('box');
+    Route::post('/add', 'BoxController@add')->name('box.add');
+    Route::delete('/remove/{row_id}', 'BoxController@remove')->name('box.remove');
+    Route::delete('/remove_box', 'BoxController@remove_box')->name('box.remove_box');
+    Route::patch('/update/{row_id}', 'BoxController@update')->name('box.update');
+});
+// Route::get('/box/', 'BoxController@index')->name('box')->middleware('auth');
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/payment/', 'PaymentController@index')->name('payment');
     Route::get('/orders/', 'OrdersController@index')->name('orders');
     Route::get('/order_detail/{id}', 'OrdersController@detail')->name('order_detail');
 });
-
 Route::post('/search', 'ProductController@search')->name('search_product');
 Route::get('/search', 'ProductController@search')->name('search_product');
-
 Route::group(['prefix' => 'user'], function (){
     Route::get('/login', 'UserController@login_form')->name('user.login');
     Route::post('/login', 'UserController@login');
     Route::post('/logout', 'UserController@logout')->name('user.logout');
     Route::get('/sign_up', 'UserController@sign_up_form')->name('user.sign_up');
     Route::post('/sign_up', 'UserController@sign_up');
-    Route::post('/active/{key}', 'UserController@active')->name('active');
+    Route::get('/active/{key}', 'UserController@active')->name('active');
 });
 
 Route::get('/test/email', function (){

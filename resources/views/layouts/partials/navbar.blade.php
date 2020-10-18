@@ -1,6 +1,7 @@
 <nav class="navbar navbar-default">
     <div class="container">
-        <div class="navbar-header">
+
+        <div class="col-lg-6" style="text-align:left !important;">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -11,9 +12,7 @@
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="/img/logo.png">
             </a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
             <form class="navbar-form navbar-left" action="{{route('search_product')}}" method="post">
                 {{ csrf_field() }}
                 <div class="input-group">
@@ -26,8 +25,10 @@
                     </span>
                 </div>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="fa fa-shopping-cart"></i> Sepet <span class="badge badge-theme">5</span></a>
+        </div>
+        <div class="col-lg-6" style="text-align: right !important;">
+            <ul class="nav navbar-right">
+                <li><a href="{{ route('box') }}"><i class="fa fa-shopping-cart"></i> Box <span class="badge badge-theme">{{ Cart::count() }}</span></a>
                 </li>
 
                 @guest
@@ -37,7 +38,7 @@
 
                 @auth
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"> Profile <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Orders</a></li>
@@ -52,8 +53,17 @@
 
             </ul>
         </div>
+
     </div>
 </nav>
+
+
+
+
+
+<?php
+?>
+
 
 <?php
 ?>
