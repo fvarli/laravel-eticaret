@@ -32,6 +32,7 @@ class PaymentController extends Controller
         $order['box_id'] = session('active_box_id');
         $order['bank'] = "Enpara";
         $order['installment'] = 1;
+        $order['status'] = "Payment has been received.";
         $order['order_price'] = Cart::subtotal();
 
         ProductOrder::create($order);

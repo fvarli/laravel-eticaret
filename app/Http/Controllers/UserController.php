@@ -35,7 +35,12 @@ class UserController extends Controller
         if(auth()->attempt(['email' => request('email'), 'password' => request('password')], request()->has('remember_me'))){
             request()->session()->regenerate();
 
-            $active_box_id = Box::firstOrCreate(['user_id' => auth()->id()])->id;
+            $active_box_id = Box::active_box_id();
+            if (is_null($active_box_id)){
+                $active_box = Box::create(['user_id' => auth()->id()]);
+                $active_box_id = $active_box->id;
+            }
+            // dd($active_box_id);
             session()->put('active_box_id', $active_box_id);
 
             if(Cart::count()>0){

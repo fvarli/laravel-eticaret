@@ -11,7 +11,7 @@ class ProductOrder extends Model
 
     protected $table = "product_order";
 
-    protected $fillable = ['box_id', 'order_price', 'full_name', 'address', 'phone', 'cell_phone', 'bank', 'installment', 'status'];
+    protected $fillable = ['box_id', 'order_price', 'status', 'full_name', 'address', 'phone', 'cell_phone', 'bank', 'installment'];
 
     public function box()
     {
