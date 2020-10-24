@@ -19,7 +19,8 @@ class CreateUserTable extends Migration
             $table->string('email', 150)->unique();
             $table->string('password', 60);
             $table->string('activation_code', 60)->nullable();
-            $table->string('is_active')->default(0);
+            $table->boolean('is_admin')->default(0);
+            $table->boolean('is_active')->default(0);
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

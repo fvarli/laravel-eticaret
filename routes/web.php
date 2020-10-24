@@ -11,6 +11,16 @@
 |
 */
 
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function (){
+    Route::redirect('/', 'admin/login');
+    Route::match(['get', 'post'],'/login', 'UserController@login')->name('admin.login');
+    Route::get('/logout', 'UserController@logout')->name('admin.logout');
+    Route::group(['middleware' => 'admin'], function (){
+        Route::get('/home', 'HomeController@index')->name('admin.home');
+    });
+
+});
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/category/{slug_category_name}', 'CategoryController@index')->name('category');
