@@ -16,7 +16,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function (){
     Route::match(['get', 'post'],'/login', 'UserController@login')->name('admin.login');
     Route::get('/logout', 'UserController@logout')->name('admin.logout');
     Route::group(['middleware' => 'admin'], function (){
+
         Route::get('/home', 'HomeController@index')->name('admin.home');
+
+        Route::group(['prefix' => 'user'], function (){
+           Route::match(['get', 'post'], '/', 'UserController@index')->name('admin.user');
+           Route::get('/new_user', 'UserController@form')->name('admin.user.new_user');
+           Route::get('/edit/{id}', 'UserController@form')->name('admin.user.edit');
+           Route::post('/save/{id?}', 'UserController@save')->name('admin.user.save');
+           Route::get('/delete/{id}', 'UserController@delete')->name('admin.user.delete');
+        });
     });
 
 });

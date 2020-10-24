@@ -32,7 +32,14 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        if(auth()->attempt(['email' => request('email'), 'password' => request('password')], request()->has('remember_me'))){
+
+        $credentials = [
+            'email' => request('email'),
+            'password' => request('password'),
+            'is_active' => 1
+        ];
+
+        if(auth()->attempt($credentials, request()->has('remember_me'))){
             request()->session()->regenerate();
 
             $active_box_id = Box::active_box_id();
