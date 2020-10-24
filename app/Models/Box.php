@@ -15,7 +15,12 @@ class Box extends Model
 
     public function product_order()
     {
-        return $this->belongsTo('App\Models\ProductOrder');
+        return $this->hasOne('App\Models\ProductOrder');
+    }
+
+    public function box_products()
+    {
+        return $this->hasMany('App\Models\BoxProduct');
     }
 
     public static function active_box_id()
@@ -31,4 +36,8 @@ class Box extends Model
         if (!is_null($active_box)) return $active_box->id;
     }
 
+    public function box_product_piece()
+    {
+        return DB::table('box_product')->where('box_id', $this->id)->sum('piece');
+    }
 }

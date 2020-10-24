@@ -3,30 +3,31 @@
 @section('content')
     <div class="container">
         <div class="bg-content">
-            <h2>Siparişler</h2>
-            <p>Henüz siparişiniz yok</p>
-            <table class="table table-bordererd table-hover">
-                <tr>
-                    <th>Sipariş Kodu</th>
-                    <th>Sipariş Tarihi</th>
-                    <th>KDV</th>
-                    <th>Kargo</th>
-                    <th>Toplam Tutar</th>
-                    <th>Durum</th>
-                    <th>İşlem</th>
-                </tr>
-                <tr>
-                    <td>SP-00123</td>
-                    <td>25.09.2017</td>
-                    <td>2.99</td>
-                    <td>0</td>
-                    <td>18.99</td>
-                    <td>
-                        Sipariş alındı, <br> Onaylandı, <br> Kargoya verildi, <br> Bir sorun var. İletişime geçin!
-                    </td>
-                    <td><a href="#" class="btn btn-sm btn-success">Detay</a></td>
-                </tr>
-            </table>
+            <h2>Orders</h2>
+            @if(count($product_orders) ==0)
+                <p>There is no order yet.</p>
+            @else
+                <table class="table table-bordererd table-hover">
+                    <tr>
+                        <th>Order Code</th>
+                        <th>Price</th>
+                        <th>Total Piece</th>
+                        <th>Status</th>
+                        <th>Process</th>
+                    </tr>
+                    @foreach($product_orders as $p_order)
+                        <tr>
+                            <td>SP-{{ $p_order->id }}</td>
+                            <td>{{ $p_order->order_price * ((100+config('cart.tax'))/100) }}</td>
+                            <td>{{ $p_order->box->box_product_piece() }}</td>
+                            <td>{{ $p_order->status }}</td>
+                            <td>
+                                <a href="{{ route('order', $p_order->id ) }}" class="btn btn-sm btn-success">Detay</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            @endif
         </div>
     </div>
 @endsection()

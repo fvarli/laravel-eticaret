@@ -23,15 +23,18 @@ Route::group(['prefix' => 'box'], function (){
     Route::delete('/remove_box', 'BoxController@remove_box')->name('box.remove_box');
     Route::patch('/update/{row_id}', 'BoxController@update')->name('box.update');
 });
+
 // Route::get('/box/', 'BoxController@index')->name('box')->middleware('auth');
 Route::get('/payment/', 'PaymentController@index')->name('payment');
 Route::post('/payment/pay', 'PaymentController@pay')->name('pay');
+
 Route::group(['middleware' => 'auth'], function (){
-    Route::get('/orders/', 'OrdersController@index')->name('orders');
-    Route::get('/order_detail/{id}', 'OrdersController@detail')->name('order_detail');
+    Route::get('/orders', 'OrdersController@index')->name('orders');
+    Route::get('/orders/{id}', 'OrdersController@detail')->name('order');
 });
 Route::post('/search', 'ProductController@search')->name('search_product');
 Route::get('/search', 'ProductController@search')->name('search_product');
+
 Route::group(['prefix' => 'user'], function (){
     Route::get('/login', 'UserController@login_form')->name('user.login');
     Route::post('/login', 'UserController@login');
