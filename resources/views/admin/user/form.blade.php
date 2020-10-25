@@ -10,9 +10,9 @@
         <h2 class="sub-header">
             {{ @$list->id != null ? "Edit" : "Add" }} User
         </h2>
+        @include('layouts.partials.errors')
+        @include('layouts.partials.alert')
         <div class="row">
-            @include('layouts.partials.errors')
-            @include('layouts.partials.alert')
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="full_name">Full Name</label>
