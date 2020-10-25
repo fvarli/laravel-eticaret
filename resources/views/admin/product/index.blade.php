@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="search">Search</label>
                 <input type="text" class="form-control form-control-sm" name="search" id="search"
-                       placeholder="Search by Product Name" value="{{ old('search') }}">
+                       placeholder="Search by ID, Name" value="{{ old('search') }}">
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
             <a href="{{ route('admin.product') }}" class="btn btn-primary">Clear</a>
