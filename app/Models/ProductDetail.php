@@ -8,6 +8,9 @@ class ProductDetail extends Model
 {
     protected $table = "product_detail";
 
+    protected $guarded = [];
+
+
     public function product()
     {
         return $this->belongsTo('App\Models\Product');

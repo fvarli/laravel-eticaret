@@ -35,6 +35,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function (){
             Route::get('/delete/{id}', 'CategoryController@delete')->name('admin.category.delete');
         });
 
+        Route::group(['prefix' => 'product'], function (){
+            Route::match(['get', 'post'], '/', 'ProductController@index')->name('admin.product');
+            Route::get('/new_product', 'ProductController@form')->name('admin.product.new_product');
+            Route::get('/edit/{id}', 'ProductController@form')->name('admin.product.edit');
+            Route::post('/save/{id?}', 'ProductController@save')->name('admin.product.save');
+            Route::get('/delete/{id}', 'ProductController@delete')->name('admin.product.delete');
+        });
+
     });
 
 });

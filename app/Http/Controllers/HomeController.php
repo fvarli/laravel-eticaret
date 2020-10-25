@@ -10,7 +10,7 @@ use App\Models\Category;
 class HomeController extends Controller{
     public function index()
     {
-        $categories = Category::whereRaw('cat_id is null')->take(6)->get();
+        $categories = Category::whereRaw('cat_id is null')->take(8)->get();
 
         $products_slider = Product::select('product.*')
             ->join('product_detail', 'product_detail.product_id', 'product.id')
