@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="page-header">Product Management</h1>
     <h2 class="sub-header">Product Form</h2>
-    <form action="{{ route('admin.product.save', @$list->id) }}" method="post">
+    <form action="{{ route('admin.product.save', @$list->id) }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
 
 
@@ -85,7 +85,8 @@
                     <label for="categories">Categories</label>
                     <select name="categories[]" id="categories" class="form-control" multiple>
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ collect(old('categories', $product_categories))->contains($category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>
+                            <option
+                                value="{{ $category->id }}" {{ collect(old('categories', $product_categories))->contains($category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -95,9 +96,19 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" class="form-control"
-                              rows="10">{{ old('description', $list->description) }}
+                    <textarea name="description" id="description" class="form-control">{{ old('description', $list->description) }}
                     </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @if($list->detail->product_image !=null)
+                        <img src="/uploads/products/{{ $list->detail->product_image }}" alt="" style="height: 100px; margin-right: 20px" class="thumbnail pull-left">
+                    @endif
+                    <label for="product_image">Product Image</label>
+                    <input type="file" id="product_image" name="product_image">
                 </div>
             </div>
         </div>
@@ -116,11 +127,16 @@
 @endsection
 @section('footer')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
     <script>
         $(function () {
             $('#categories').select2({
                 placeholder: 'Please select a category'
-            })
-        })
+            });
+            let options = {
+                language: 'en'
+            }
+            CKEDITOR.replace('description', options);
+        });
     </script>
 @endsection

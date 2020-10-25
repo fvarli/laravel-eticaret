@@ -30,6 +30,7 @@
             <thead class="thead-dark">
             <tr>
                 <th>Product ID</th>
+                <th>Product Image</th>
                 <th>Product Slug</th>
                 <th>Product Name</th>
                 <th>Product Price</th>
@@ -40,7 +41,7 @@
             <tbody>
             @if(count($product_list) == 0 )
                 <tr>
-                    <td colspan="6" class="text-center">
+                    <td colspan="7" class="text-center">
                         Not found record!
                     </td>
                 </tr>
@@ -48,6 +49,7 @@
             @foreach($product_list as $list)
                 <tr>
                     <td>{{ $list->id }}</td>
+                    <td><img src="{{ $list->detail->product_image!=null ? asset('uploads/products/' . $list->detail->product_image ) : '/img/400x400_product_image.png' }}" style="height: 100px; width: 100px;"></td>
                     <td>{{ $list->slug }}</td>
                     <td>{{ $list->product_name }}</td>
                     <td>{{ $list->price }} <small>₺</small></td>

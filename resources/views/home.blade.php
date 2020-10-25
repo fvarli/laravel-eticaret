@@ -46,7 +46,7 @@
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body">
                         <a href="{{ route('product', $show_today_opportunity->slug) }}" style="color: blue">
-                            <img src="/img/400x485_product_image.png" class="img-responsive">
+                            <img src="{{ $show_today_opportunity->detail->product_image!=null ? asset('uploads/products/' . $show_today_opportunity->detail->product_image ) : '/img/400x400_product_image.png' }}" class="img-responsive" style="min-width: 100%">
                             {{ $show_today_opportunity->product_name }}
                         </a>
                     </div>
@@ -63,7 +63,7 @@
                         @foreach($products_featured as $product)
                             <div class="col-md-3 product">
                                 <a href="{{ route('product', $product->slug) }}">
-                                    <img src="/img/400x400_product_image.png"></a>
+                                    <img src="{{ $product->detail->product_image!=null ? asset('uploads/products/' . $product->detail->product_image ) : '/img/400x400_product_image.png' }}" class="img-responsive" style="min-width: 100%"></a>
                                 <p><a href="{{ route('product', $product->slug) }}">
                                         {{ $product->product_name }}
                                     </a>
@@ -84,7 +84,7 @@
                         @foreach($products_best_seller as $product)
                             <div class="col-md-3 product">
                                 <a href="{{ route('product', $product->slug) }}">
-                                    <img src="/img/400x400_product_image.png"></a>
+                                    <img src="{{ $product->detail->product_image!=null ? asset('uploads/products/' . $product->detail->product_image ) : '/img/400x400_product_image.png' }}" class="img-responsive" style="min-width: 100%"></a>
                                 <p><a href="{{ route('product', $product->slug) }}">
                                         {{ $product->product_name }}
                                     </a>
@@ -104,7 +104,7 @@
                         @foreach($products_discount as $product)
                             <div class="col-md-3 product">
                                 <a href="{{ route('product', $product->slug) }}">
-                                    <img src="/img/400x400_product_image.png"></a>
+                                    <img src="{{ $product->detail->product_image!=null ? asset('uploads/products/' . $product->detail->product_image ) : '/img/400x400_product_image.png' }}" class="img-responsive" style="min-width: 100%"></a>
                                 <p><a href="{{ route('product', $product->slug) }}">
                                         {{ $product->product_name }}
                                     </a>

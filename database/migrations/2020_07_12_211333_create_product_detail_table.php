@@ -21,6 +21,7 @@ class CreateProductDetailTable extends Migration
             $table->boolean('show_featured')->default(0);
             $table->boolean('show_best_seller')->default(0);
             $table->boolean('show_discount')->default(0);
+            $table->string('product_image', 50);
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
