@@ -38,6 +38,13 @@
             </tr>
             </thead>
             <tbody>
+            @if(count($user_list) == 0 )
+                <tr>
+                    <td colspan="7" class="text-center">
+                        Not found record!
+                    </td>
+                </tr>
+            @endif
             @foreach($user_list as $list)
                 <tr>
                     <td>{{ $list->id }}</td>

@@ -26,6 +26,7 @@ class UserController extends Controller
                 ->paginate(2)
                 ->appends('search', $search);
         } else {
+            request()->flush();
             $user_list = User::orderByDesc('created_at')->paginate(2);
         }
         //print_r($user_list);
