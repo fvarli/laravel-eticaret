@@ -19,9 +19,8 @@ class UserController extends Controller
             request()->flash();
             $search = request('search');
             $user_list = User::where('full_name', 'like', "%$search%")
+                ->orWhere('id', 'like', "%$search%")
                 ->orWhere('email', 'like', "%$search%")
-                ->orWhere('is_active', 'like', "%$search%")
-                ->orWhere('is_admin', 'like', "%$search%")
                 ->orderByDesc('created_at')
                 ->paginate(2)
                 ->appends('search', $search);
