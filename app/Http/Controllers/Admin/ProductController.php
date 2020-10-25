@@ -17,6 +17,7 @@ class ProductController extends Controller
             request()->flash();
             $search = request('search');
             $product_list = Product::where('product_name', 'like', "%$search%")
+                ->orWhere('id', 'like', "%$search%")
                 ->orderByDesc('id')
                 ->paginate(10)
                 ->appends(['search' => $search]);
