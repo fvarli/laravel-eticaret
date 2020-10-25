@@ -26,6 +26,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function (){
            Route::post('/save/{id?}', 'UserController@save')->name('admin.user.save');
            Route::get('/delete/{id}', 'UserController@delete')->name('admin.user.delete');
         });
+
+        Route::group(['prefix' => 'category'], function (){
+            Route::match(['get', 'post'], '/', 'CategoryController@index')->name('admin.category');
+            Route::get('/new_category', 'CategoryController@form')->name('admin.category.new_category');
+            Route::get('/edit/{id}', 'CategoryController@form')->name('admin.category.edit');
+            Route::post('/save/{id?}', 'CategoryController@save')->name('admin.category.save');
+            Route::get('/delete/{id}', 'CategoryController@delete')->name('admin.category.delete');
+        });
+
     });
 
 });
