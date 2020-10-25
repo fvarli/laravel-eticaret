@@ -14,7 +14,20 @@ class UserController extends Controller
 
     public function index()
     {
-        $user_list = User::orderByDesc('created_at')->paginate(8);
+        // TODO filter by is_active or is_admin
+        if (request()->filled('search')) {
+            request()->flash();
+            $search = request('search');
+            $user_list = User::where('full_name', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%")
+                ->orWhere('is_active', 'like', "%$search%")
+                ->orWhere('is_admin', 'like', "%$search%")
+                ->orderByDesc('created_at')
+                ->paginate(2)
+                ->appends('search', $search);
+        } else {
+            $user_list = User::orderByDesc('created_at')->paginate(2);
+        }
         //print_r($user_list);
         return view('admin.user.index', compact('user_list'));
     }

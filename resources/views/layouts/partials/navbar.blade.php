@@ -16,7 +16,7 @@
             <form class="navbar-form navbar-left" action="{{route('search_product')}}" method="post">
                 {{ csrf_field() }}
                 <div class="input-group">
-                    <input type="text" name="search_product" id="navbar-search" class="form-control" placeholder="Ara"
+                    <input type="text" name="search_product" id="navbar-search" class="form-control" placeholder="Search"
                            value="{{old('search_product')}}">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-default">
