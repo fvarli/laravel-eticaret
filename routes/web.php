@@ -43,6 +43,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function (){
             Route::get('/delete/{id}', 'ProductController@delete')->name('admin.product.delete');
         });
 
+        Route::group(['prefix' => 'order'], function (){
+            Route::match(['get', 'post'], '/', 'OrderController@index')->name('admin.order');
+            Route::get('/edit/{id}', 'OrderController@form')->name('admin.order.edit');
+            Route::post('/save/{id?}', 'OrderController@save')->name('admin.order.save');
+            Route::get('/delete/{id}', 'OrderController@delete')->name('admin.order.delete');
+        });
+
     });
 
 });

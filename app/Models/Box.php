@@ -40,4 +40,9 @@ class Box extends Model
     {
         return DB::table('box_product')->where('box_id', $this->id)->sum('piece');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
