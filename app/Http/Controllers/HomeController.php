@@ -16,7 +16,7 @@ class HomeController extends Controller{
             ->join('product_detail', 'product_detail.product_id', 'product.id')
             ->where('product_detail.show_slider',1)
             ->orderBy('updated_at', 'desc')
-            ->take(4)->get();
+            ->take(get_settings('home_slider_product_piece'))->get();
 
         $show_today_opportunity = Product::select('product.*')
             ->join('product_detail', 'product_detail.product_id', 'product.id')
@@ -28,19 +28,19 @@ class HomeController extends Controller{
             ->join('product_detail', 'product_detail.product_id', 'product.id')
             ->where('product_detail.show_featured',1)
             ->orderBy('updated_at', 'desc')
-            ->take(4)->get();
+            ->take(get_settings('home_list_product_piece'))->get();
 
         $products_best_seller = Product::select('product.*')
             ->join('product_detail', 'product_detail.product_id', 'product.id')
             ->where('product_detail.show_best_seller',1)
             ->orderBy('updated_at', 'desc')
-            ->take(4)->get();
+            ->take(get_settings('home_list_product_piece'))->get();
 
         $products_discount = Product::select('product.*')
             ->join('product_detail', 'product_detail.product_id', 'product.id')
             ->where('product_detail.show_discount',1)
             ->orderBy('updated_at', 'desc')
-            ->take(4)->get();
+            ->take(get_settings('home_list_product_piece'))->get();
 
         return view('home', compact('categories', 'products_slider', 'show_today_opportunity', 'products_featured', 'products_best_seller', 'products_discount'));
 
