@@ -22,11 +22,11 @@ class UserController extends Controller
                 ->orWhere('id', 'like', "%$search%")
                 ->orWhere('email', 'like', "%$search%")
                 ->orderByDesc('created_at')
-                ->paginate(2)
+                ->paginate(10)
                 ->appends('search', $search);
         } else {
             request()->flush();
-            $user_list = User::orderByDesc('created_at')->paginate(2);
+            $user_list = User::orderByDesc('created_at')->paginate(10);
         }
         //print_r($user_list);
         return view('admin.user.index', compact('user_list'));
