@@ -15,7 +15,7 @@
                 </tr>
                 @foreach($order_detail->box->box_products as $box_product)
                 <tr>
-                    <td><a href="{{ route('product', $box_product->product->slug) }}"><img src="/img/640x400_product_image.png" style="width: 120px; height: 120px;"></a></td>
+                    <td><a href="{{ route('product', $box_product->product->slug) }}"><img src="{{ $box_product->product->detail->product_image!=null ? asset('uploads/products/' . $box_product->product->detail->product_image ) : '/img/400x400_product_image.png' }}" style="height: 100px; width: 100px;"></a></td>
                     <td><a href="{{ route('product', $box_product->product->slug) }}">{{ $box_product->product->product_name }}</a></td>
                     <td>{{ $box_product->price }} <small>₺</small></td>
                     <td>{{ $box_product->piece }}</td>

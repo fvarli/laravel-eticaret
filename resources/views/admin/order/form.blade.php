@@ -3,144 +3,135 @@
 @section('content')
     <h1 class="page-header">Order Management</h1>
     <h2 class="sub-header">Order Form</h2>
-    <form action="{{ route('admin.product.save', @$list->id) }}" method="post" enctype="multipart/form-data">
-        {{ csrf_field() }}
+    <h2 class="sub-header">
+        {{ @$list->id != null ? "Edit" : "Add" }} Order
+    </h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-lg-6">
+                <form action="{{ route('admin.order.save', @$list->id) }}" method="post">
+                    {{ csrf_field() }}
 
 
-        <h2 class="sub-header">
-            {{ @$list->id != null ? "Edit" : "Add" }} Product
-        </h2>
-        @include('layouts.partials.errors')
-        @include('layouts.partials.alert')
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="slug">Slug</label>
-                    <input type="hidden" name="original_slug" value="{{ old('slug', $list->slug) }}">
-                    <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug"
-                           value="{{ old('slug', $list->slug) }}">
+                    @include('layouts.partials.errors')
+                    @include('layouts.partials.alert')
+                    <div class="row">
+                        <br>
+                        <div class="col-md-11">
+                            <div class="form-group">
+                                <label for="full_name">Full Name</label>
+                                <input type="text" class="form-control" id="full_name" name="full_name"
+                                       placeholder="Full Name"
+                                       value="{{ old('full_name', $list->full_name) }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="form-group">
+                                <label for="phone"></label>
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                       placeholder="Phone"
+                                       value="{{ old('phone', $list->phone) }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="form-group">
+                                <label for="cell_phone"></label>
+                                <input type="text" class="form-control" id="cell_phone" name="cell_phone"
+                                       placeholder="Cell Phone"
+                                       value="{{ old('cell_phone', $list->cell_phone) }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="form-group">
+                                <label for="address"></label>
+                                <input type="text" class="form-control" id="address" name="address"
+                                       placeholder="Address"
+                                       value="{{ old('address', $list->address) }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option {{ old('status', $list->status) == 'Payment has been received.' ? 'selected' : '' }}>
+                                        Payment has been received.
+                                    </option>
+                                    <option {{ old('status', $list->status) == 'Payment has been confirmed.' ? 'selected' : '' }}>
+                                        Payment has been confirmed.
+                                    </option>
+                                    <option {{ old('status', $list->status) == 'It has been sent by cargo.' ? 'selected' : '' }}>
+                                        It has been sent by cargo.
+                                    </option>
+                                    <option {{ old('status', $list->status) == 'Order has been completed.' ? 'selected' : '' }}>
+                                        Order has been completed.
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 pull-left">
+                            <button type="submit" class="btn btn-primary">
+                                {{ @$list->id != null ? "Edit" : "Save" }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <h2>Order (SP-{{$list->id}})</h2>
+                <div class="row">
+                    <div>
+                        <table class="table table-bordererd table-hover">
+                            <tr>
+                                <th colspan="2">Product</th>
+                                <th>Price</th>
+                                <th>Piece</th>
+                                <th>Sub Total</th>
+                                <th>Status</th>
+                            </tr>
+                            @foreach($list->box->box_products as $box_product)
+                                <tr>
+                                    <td><a href="{{ route('product', $box_product->product->slug) }}"><img src="{{ $box_product->product->detail->product_image!=null ? asset('uploads/products/' . $box_product->product->detail->product_image ) : '/img/400x400_product_image.png' }}" style="height: 100px; width: 100px;"></a></td>
+                                    <td>
+                                        <a href="{{ route('product', $box_product->product->slug) }}">{{ $box_product->product->product_name }}</a>
+                                    </td>
+                                    <td>{{ $box_product->price }} <small>₺</small></td>
+                                    <td>{{ $box_product->piece }}</td>
+                                    <td>{{ $box_product->price * $box_product->piece }} <small>₺</small></td>
+                                    <td>{{ $box_product->status }}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <th colspan="4" class="text-right">Total Price</th>
+                                <th colspan="2">{{ $list->order_price }} <small>₺</small></th>
+                            </tr>
+                            <tr>
+                                <th colspan="4" class="text-right">KDV</th>
+                                <th colspan="2">{{ (($list->order_price * config('cart.tax')) / 100)}} <small>₺</small>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="4" class="text-right">Total Price (KDV)</th>
+                                <th colspan="2">{{ $list->order_price  * ((100+config('cart.tax'))/100) }}
+                                    <small>₺</small></th>
+                            </tr>
+                            <tr>
+                                <th colspan="4" class="text-right">Order Status</th>
+                                <th colspan="2">{{ $list->status }}</th>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="category_name">Product Name</label>
-                    <input type="text" class="form-control" id="product_name" name="product_name"
-                           placeholder="Product Name"
-                           value="{{ old('product_name', $list->product_name) }}">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" name="price"
-                           placeholder="Price"
-                           value="{{ old('price', $list->price) }}">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="checkbox">
-                    <label>
-                        <input type="hidden" name="show_slider" value="0">
-                        <input type="checkbox" name="show_slider"
-                               value="1" {{ old('show_slider', $list->detail->show_slider) ? 'checked' : '' }}> Show on
-                        Slider
-                    </label> |
-                    <label>
-                        <input type="hidden" name="show_today_opportunity" value="0">
-                        <input type="checkbox" name="show_today_opportunity"
-                               value="1" {{ old('show_today_opportunity', $list->detail->show_today_opportunity) ? 'checked' : '' }}>
-                        Show Today Opportunity
-                    </label> |
-                    <label>
-                        <input type="hidden" name="show_featured" value="0">
-                        <input type="checkbox" name="show_featured"
-                               value="1" {{ old('show_featured', $list->detail->show_featured) ? 'checked' : '' }}> Show
-                        Featured
-                    </label> |
-                    <label>
-                        <input type="hidden" name="show_best_seller" value="0">
-                        <input type="checkbox" name="show_best_seller"
-                               value="1" {{ old('show_best_seller', $list->detail->show_best_seller) ? 'checked' : '' }}>
-                        Show Best Seller
-                    </label> |
-                    <label>
-                        <input type="hidden" name="show_discount" value="0">
-                        <input type="checkbox" name="show_discount"
-                               value="1" {{ old('show_discount', $list->detail->show_discount) ? 'checked' : '' }}> Show
-                        Discount
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="categories">Categories</label>
-                    <select name="categories[]" id="categories" class="form-control" multiple>
-                        @foreach($categories as $category)
-                            <option
-                                value="{{ $category->id }}" {{ collect(old('categories', $product_categories))->contains($category->id) ? 'selected' : '' }}>{{ $category->category_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" class="form-control">{{ old('description', $list->description) }}
-                    </textarea>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @if($list->detail->product_image !=null)
-                        <img src="/uploads/products/{{ $list->detail->product_image }}" alt="" style="height: 100px; margin-right: 20px" class="thumbnail pull-left">
-                    @endif
-                    <label for="product_image">Product Image</label>
-                    <input type="file" id="product_image" name="product_image">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 pull-left">
-                <button type="submit" class="btn btn-primary">
-                    {{ @$list->id != null ? "Edit" : "Save" }}
-                </button>
-            </div>
-        </div>
-    </form>
-
-@endsection
-@section('head')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
-@endsection
-@section('footer')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script src="//cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
-    <script>
-        $(function () {
-            $('#categories').select2({
-                placeholder: 'Please select a category'
-            });
-            let options = {
-                language: 'en',
-                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
-                filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
-            };
-            CKEDITOR.replace('description', options);
-        });
-    </script>
+    </div>
 @endsection

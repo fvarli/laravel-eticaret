@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
-use App\Models\Product;
 use App\Models\ProductOrder;
-use App\Models\ProductDetail;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
@@ -20,7 +16,7 @@ class OrderController extends Controller
             $search = request('search');
             $order_list = ProductOrder::with('box.user')->where('full_name', 'like', "%$search%")
                 ->orWhere('bank', 'like', "%$search%")
-                ->orWhere('id',$search)
+                ->orWhere('id', $search)
                 ->orderByDesc('id')
                 ->paginate(10)
                 ->appends(['search' => $search]);
@@ -35,94 +31,48 @@ class OrderController extends Controller
 
     public function form($id = null)
     {
-        $list = new Product;
-        $product_categories = [];
+
         if ($id != null) {
-            $list = Product::find($id);
-            $product_categories = $list->category()->pluck('category_id')->all();
+            $list = ProductOrder::with('box.box_products.product')->find($id);
         }
 
-        // dd($product_categories);
-        $categories = Category::all();
-        // dd($categories);
+        // dd($list);
 
-        return view('admin.product.form', compact('list', 'categories', 'product_categories'));
+        return view('admin.order.form', compact('list'));
     }
 
     public function save($id = null)
     {
-        $data = request()->only('slug', 'product_name', 'price', 'description');
-        if (!request()->filled('slug')) {
-            $data['slug'] = str_slug(request('product_name'));
-            request()->merge(['slug' => $data['slug']]);
-        }
         $this->validate(request(), [
-            'product_name' => 'required',
-            'price' => 'required',
-            'slug' => (request('original_slug') != request('slug') ? 'unique:category,slug' : '')
+            'full_name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'status' => 'required'
         ]);
 
-        // dd(request('show_slider'));
+        $data = request()->only('full_name', 'address', 'phone', 'cell_phone', 'status');
 
-        $data_detail = request()->only('show_slider', 'show_today_opportunity', 'show_featured', 'show_best_seller', 'show_discount');
-
-        $categories = request('categories');
-
-        //dd($categories);
+        // dd($data);
 
         if ($id != null) {
-            $list = Product::where('id', $id)->firstOrFail();
+            $list = ProductOrder::where('id', $id)->firstOrFail();
             $list->update($data);
-            $list->detail()->update($data_detail);
-            $list->category()->sync($categories);
-
-        } else {
-            $list = Product::create($data);
-            $list->detail()->create($data_detail);
-            $list->category()->attach($categories);
-        }
-
-        if(request()->hasFile('product_image')){
-            $this->validate(request(), [
-               'product_image' => 'image|mimes:jpg,png,jpeg,gif|max:2048'
-            ]);
-
-            $product_image = request()->file('product_image');
-            $file_name = $list->id . '-' . time() . '.' . $product_image->extension();
-            // $file_name = $product_image->getClientOriginalName();
-            // $file_name = $product_image->hashName();
-
-            if($product_image->isValid()){
-                $product_image->move('uploads/products', $file_name);
-                ProductDetail::updateOrCreate(
-                   ['product_id' => $list->id],
-                   ['product_image' => $file_name]
-                );
-            }
         }
 
         return redirect()
-            ->route('admin.product.edit', $list->id)
+            ->route('admin.order.edit', $list->id)
             ->with('message_type', 'success')
-            ->with('message', ($id != null ? 'Updated' : 'Saved'));
+            ->with('message', ('Updated'));
     }
 
     public function delete($id)
     {
-        $product = Product::find($id);
-        $product->category()->detach();
-        $product_delete = $product->delete();
+        ProductOrder::destroy($id);
 
-        if ($product_delete) {
-            return redirect()
-                ->route('admin.product')
-                ->with('message_type', 'success')
-                ->with('message', 'Category has been deleted');
-        } else {
-            return redirect()
-                ->route('admin.product')
-                ->with('message_type', 'error')
-                ->with('message', 'Category couldn\'t deleted');
-        }
+        return redirect()
+            ->route('admin.order')
+            ->with('message_type', 'success')
+            ->with('message', 'Category has been deleted');
+
     }
 }
